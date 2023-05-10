@@ -462,15 +462,22 @@ def store_chat():
     if user_id is None:
         return jsonify({"error": "Not authenticated"}), 401
 
-    inputarray = []
+    last_user_message = ""
 
-    inputarray.append({"role": "system", "content": "Describe the goal or statement of the following user input in 1 word:"})
-
-    for message in conversation:
+    # Find the last user message
+    for message in conversation[::-1]:
         if message["role"] == "user":
-            inputarray.append({"role": "user", "content": message["content"]})
+            last_user_message = message["content"]
+            break
+
+    if not last_user_message:
+        last_user_message = "no input"
+
+    inputarray = [{"role": "user", "content": f'Describe the goal or statement of the following text in 2 words: {last_user_message}'}]
 
     label = generate_chattitle(inputarray)
+
+
     label = label.rstrip(".")
 
     chat_order = 0
@@ -501,14 +508,20 @@ def generate_chattitle(inputarray):
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         temperature=0.5,
-        max_tokens=5,
+        max_tokens=10,
         n=1,
         stop=None,
         messages=inputarray,
     )
 
     response = completion.choices[0].message['content']
+
+    # Add debugging information
+    print("Input array:", inputarray)
+    print("Generated response:", response)
+
     return response.strip()
+
 
 
 @app.route('/api/chats/update', methods=['POST'])
@@ -748,12 +761,8 @@ def create_chats_table():
     cursor.close()
     conn.close()
 
-
-
-
 if __name__ == '__main__':
     create_users_table()
     create_prompts_table()
     create_chats_table()
     app.run(debug=True)
-
