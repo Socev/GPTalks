@@ -25,9 +25,10 @@ GPTalks is an interactive web application that enables users to have dynamic con
 
 **Installation and Setup**
 --------------------------
-**Clone the repository:**
-(oh lord help me, how does one clone a repository)
-Just place all files in the same dir, keep the structure intact
+**Get all files:**
+1) Create a projectfolder, eg "GPTalks"
+2) Place "gptalks.py", "settings.env" and "requirements.txt" in the mainfolder
+3) Extract "subfolders.zip" in the mainfolder: you will now have a "static" and "templates" subfolder
 
 **Navigate to the project directory:**
 cd GPTalks
