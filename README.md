@@ -26,22 +26,11 @@ GPTalks is an interactive web application that enables users to have dynamic con
 **Installation and Setup**
 --------------------------
 **Clone the repository:**
-Copy code
-git clone https://github.com/yourusername/GPTalks.git
+(oh lord help me, how does one clone a repository)
+Just place all files in the same dir, keep the structure intact
 
 **Navigate to the project directory:**
-Copy code
 cd GPTalks
-
-**Create a virtual environment (optional but recommended):**
-python -m venv venv
-
-**Activate the virtual environment:**
-**On Windows:**
-venv\Scripts\activate
-
-**On Linux/Mac:**
-source venv/bin/activate
 
 **Install the required dependencies:**
 pip install -r requirements.txt
